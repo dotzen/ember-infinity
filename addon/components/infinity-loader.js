@@ -45,8 +45,13 @@ export default Ember.Component.extend({
     var scrollable       = this.get('scrollable');
     var scrollableHeight = scrollable.height();
     var inviewThreshold  = this.get('inviewThreshold');
+    var scrollThreshold  = scrollableHeight;
 
-    var inView = selfOffset - inviewThreshold < scrollableHeight;
+    if(scrollable.get(0) === window) {
+      scrollThreshold += scrollable.scrollTop();
+    }
+
+    var inView = selfOffset - inviewThreshold < scrollThreshold;
 
     if (inView && !this.get('developmentMode')) {
       this.sendAction('loadMoreAction');
