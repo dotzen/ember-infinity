@@ -13,6 +13,7 @@ export default Ember.Component.extend({
   destroyOnInfinity: false,
   developmentMode: false,
   scrollable: null,
+  inviewThreshold: 100,
 
   didInsertElement() {
     this._super(...arguments);
@@ -41,10 +42,11 @@ export default Ember.Component.extend({
 
   _checkIfInView() {
     var selfOffset       = this.$().offset().top;
-    var scrollable       = this.get("scrollable");
-    var scrollableBottom = scrollable.height() + scrollable.scrollTop();
+    var scrollable       = this.get('scrollable');
+    var scrollableHeight = scrollable.height();
+    var inviewThreshold  = this.get('inviewThreshold');
 
-    var inView = selfOffset < scrollableBottom;
+    var inView = selfOffset - inviewThreshold < scrollableHeight;
 
     if (inView && !this.get('developmentMode')) {
       this.sendAction('loadMoreAction');
