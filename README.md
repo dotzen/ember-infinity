@@ -294,3 +294,12 @@ Will install the default `infinity-loader` template into your host app, at
 
 You can optionally pass in a jQuery style selector string.  If it's not a string,
 scrollable will default to using the window for the scroll binding.
+
+* **inviewThreshold**
+
+```html
+{{infinity-loader inviewThreshold="200"}}
+```
+
+You can optionally pass in a pixel height that will cause the action to trigger before
+the component is in view.  The default is 0.
