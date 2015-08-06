@@ -41,6 +41,10 @@ export default Ember.Component.extend({
   },
 
   _checkIfInView() {
+    if(!this.$()) {
+      return;
+    }
+
     var selfOffset       = this.$().offset().top;
     var scrollable       = this.get('scrollable');
     var scrollableHeight = scrollable.height();
